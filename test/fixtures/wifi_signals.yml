@@ -2,8 +2,8 @@
 
 one:
   SSID: MyString
-  RSSI: 9.99
+  RSSI: -13.5
 
 two:
   SSID: MyString
-  RSSI: 9.99
+  RSSI: -45.7

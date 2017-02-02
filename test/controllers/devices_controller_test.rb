@@ -11,28 +11,25 @@ class DevicesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create device" do
+    device_id = 11223344556677
     assert_difference('Device.count') do
+      post devices_url, params: { device: { device_id: device_id } }, as: :json
+    end
+
+    assert_response :created
+  end
+
+  test "should not create duplicate device" do
+    assert_difference('Device.count', 0) do
       post devices_url, params: { device: { device_id: @device.device_id } }, as: :json
     end
 
-    assert_response 201
+    assert_response :unprocessable_entity
   end
 
   test "should show device" do
-    get device_url(@device), as: :json
+    get device_url(@device.device_id), as: :json
     assert_response :success
   end
-
-  test "should update device" do
-    patch device_url(@device), params: { device: { device_id: @device.device_id } }, as: :json
-    assert_response 200
-  end
-
-  test "should destroy device" do
-    assert_difference('Device.count', -1) do
-      delete device_url(@device), as: :json
-    end
-
-    assert_response 204
-  end
+  
 end
