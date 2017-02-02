@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :wifi_signals, only: [:index, :show]
 
-  resources :devices do
+  resources :devices, only: [:index, :show, :create] do
     resources :wifi_signals,
     controller: 'device_wifi_signals',
     only: [:index, :create]
